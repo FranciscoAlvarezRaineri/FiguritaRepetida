@@ -1,0 +1,45 @@
+.cardContainer{
+    margin: 2%;
+}
+
+.singleProductGeneral{
+    margin-left: 12%;
+    width: 75%;
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.singleProductCard{
+    width: 50%;
+}
+
+.singleProductPriceFavCart{
+    justify-content: right;
+    margin: 5%
+}
+
+.singleProductDescription{
+    margin: 10%;
+    
+}
+
+.singleProduct{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.singleProductImage{
+    justify-content: center;
+}
+
+.singleProductButtons{
+    justify-content: end;
+    margin: 2%;
+}
+
+.singleProductTittle{
+    justify-content: center;
+}
