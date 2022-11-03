@@ -4,11 +4,15 @@ const pedidosSeed = require("./pedidos");
 const carritosSeed = require("./carritos");
 
 module.exports = function () {
-  return usuariosSeed()
-    .then(() =>
-      productosSeed().then(() => pedidosSeed().then(() => carritosSeed()))
-    )
-    .then(() => {
-      console.log("Database Seedeada");
-    });
+  return productosSeed().then(() =>
+    usuariosSeed().then(() => {
+      setTimeout(() => {
+        pedidosSeed().then(() =>
+          carritosSeed().then(() => {
+            console.log("Database Seedeada");
+          })
+        );
+      }, 10);
+    })
+  );
 };

@@ -1,6 +1,8 @@
 const express = require("express");
 const { Usuarios } = require("../db/models/index");
 const router = express.Router();
+const { generateToken, validateToken } = require("../config/token");
+const { validateAuth } = require("../middleware/auth");
 
 router.get("/", (req, res) => {
   Usuarios.findAll()
@@ -8,13 +10,17 @@ router.get("/", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.get("/me", (req, res) => {
-  Usuarios.findOne({ where: { /*logueado == true*/ } })
+router.get("/me", validateAuth, (req, res) => {
+  Usuarios.findOne({
+    where: {
+      email: req.user.email,
+    },
+  })
     .then((result) => res.status(200).send(result))
     .catch((err) => console.log(err));
 });
 
-router.get("/:id", (req, res) => {
+router.get("/buscar/:id", (req, res) => {
   const id = req.params.id;
   Usuarios.findOne({ where: { id } })
     .then((result) => res.status(200).send(result))
@@ -29,41 +35,32 @@ router.post("/registro", (req, res) => {
 
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
   Usuarios.findOne({ where: { email } }).then((user) => {
-    if (!user) return res.sendStatus(401);
-    // user.validarPassword(password).then((isValid) => {
-    //   if (!isValid) return res.sendStatus(401);
-    console.log("login");
-    res.status(200).send(true);
-
-    // const payload = {
-    //   email: user.email,
-    //   favs: user.favorites,
-    // };
-
-    // const token = generateToken(payload);
-
-    // res.cookie("token", token);
-
-    // res.send(payload);
-    // });
+    if (!user) return res.status(401).send("Usuario Inexistente");
+    user.validarPassword(password).then((isValid) => {
+      if (!isValid) return res.status(401).send("Contraseña Incorrecta");
+      const payload = {
+        email: user.email,
+        username: user.username,
+      };
+      const token = generateToken(payload);
+      res.cookie("token", token).status(200).send(user);
+    });
   });
 });
 router.post("/logout", (req, res) => {
-  // Borrar el token
-  //Setear lo que sea a "deslogueado"
-  //Setear usuario actual a "null"
-  console.log("logout");
+  res.clearCookie("token").status(204).send({});
 });
 
-router.put("/:id", (req, res) => {
+router.put("/buscar:id", (req, res) => {
   const id = req.params.id;
   Usuarios.update(req.body, { where: { id } }).then((result) =>
     res.status(202).send(result)
   );
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/buscar:id", (req, res) => {
   const id = req.params.id;
   Usuarios.destroy({ where: { id } }).then((result) => res.sendStatus(204));
 });

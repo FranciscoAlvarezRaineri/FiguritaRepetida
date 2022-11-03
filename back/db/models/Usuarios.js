@@ -1,8 +1,20 @@
 const db = require("../index");
 const S = require("sequelize");
 const Carritos = require("./Carritos");
+const bcrypt = require("bcrypt");
 
-class Usuarios extends S.Model {}
+class Usuarios extends S.Model {
+  hash(password, salt) {
+    return bcrypt.hash(password, salt);
+  }
+
+  validarPassword(password) {
+    console.log(this.salt);
+    return this.hash(password, this.salt).then(
+      (newHash) => newHash === this.password
+    );
+  }
+}
 
 Usuarios.init(
   {
@@ -30,6 +42,9 @@ Usuarios.init(
       type: S.STRING,
       allownull: false,
     },
+    salt: {
+      type: S.STRING,
+    },
     rol: {
       type: S.STRING,
     },
@@ -42,12 +57,24 @@ Usuarios.init(
     sequelize: db,
     modelName: "usuario",
     hooks: {
+      beforeCreate: (usuario) => {
+        const salt = bcrypt.genSaltSync();
+        usuario.salt = salt;
+        return usuario.hash(usuario.password, salt).then((hash) => {
+          usuario.password = hash;
+        });
+      },
       afterCreate: (usuario) => {
         Carritos.create({ usuarioId: usuario.id });
       },
       afterBulkCreate: (res) => {
         res.forEach((usuario) => {
           Carritos.create({ usuarioId: usuario.id });
+          const salt = bcrypt.genSaltSync();
+          usuario.update({ salt: salt });
+          return usuario.hash(usuario.password, salt).then((hash) => {
+            usuario.update({ password: hash });
+          });
         });
       },
     },
