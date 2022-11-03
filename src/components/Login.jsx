@@ -37,11 +37,11 @@ const Login = () => {
     padding: 20,
     height: "70vh",
     width: 280,
-    margin: "20px auto",
+    margin: "90px auto",
   };
 
   const avatarStyle = { backgroundColor: "#ff9f1c" };
-  const btnstyle = { margin: "8px 0" };
+  const btnstyle = { margin: "10px 0" };
   return (
     <Grid>
       <Paper elevation={10} style={paperStyle}>
