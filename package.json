@@ -28,6 +28,7 @@
     "react-scripts": "5.0.1",
     "react-swipeable-views-core": "^0.14.0",
     "redux": "^4.2.0",
+    "redux-logger": "^3.0.6",
     "sequelize": "^6.25.3",
     "web-vitals": "^2.1.4"
   },

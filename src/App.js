@@ -14,6 +14,7 @@ import Home from "./components/Home";
 import ContentPaises from "./components/ContentPaises";
 import ContentEspeciales from "./components/ContentEspeciales";
 import ContentRareza from "./components/ContentRareza";
+
 function App() {
   const [allProducts, setAllProducts] = useState([]);
 
