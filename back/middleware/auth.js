@@ -1,15 +1,23 @@
-const { validateToken } = require("../config/token");
+const { validarToken } = require("../config/token");
 
-function validateAuth(req, res, next) {
+function validarAuth(req, res, next) {
   const token = req.cookies.token;
   if (!token) return res.sendStatus(401);
 
-  const { user } = validateToken(token);
-  if (!user) return res.sendStatus(401);
+  const { usuario } = validarToken(token);
+  if (!usuario) return res.sendStatus(401);
 
-  req.user = user;
-
+  req.usuario = usuario;
   next();
 }
 
-module.exports = { validateAuth };
+function validarRol(req, res, next) {
+  const usuario = req.usuario;
+
+  if (usuario.rol != "admin") return res.sendStatus(401);
+
+  req.usuario = usuario;
+  next();
+}
+
+module.exports = { validarAuth, validarRol };

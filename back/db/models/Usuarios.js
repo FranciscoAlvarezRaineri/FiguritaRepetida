@@ -48,9 +48,8 @@ Usuarios.init(
     rol: {
       type: S.STRING,
     },
-    favoritos: {
-      type: S.ARRAY(S.STRING),
-      defaultValue: [],
+    urlPerfil: {
+      type: S.STRING,
     },
   },
   {
@@ -65,11 +64,11 @@ Usuarios.init(
         });
       },
       afterCreate: (usuario) => {
-        Carritos.create({ usuarioId: usuario.id });
+        Carritos.create({ usuarioId: usuario.id }); // Crear carrito del usuario
       },
       afterBulkCreate: (res) => {
         res.forEach((usuario) => {
-          Carritos.create({ usuarioId: usuario.id });
+          Carritos.create({ usuarioId: usuario.id }); // Crear carrito del usuario
           const salt = bcrypt.genSaltSync();
           usuario.update({ salt: salt });
           return usuario.hash(usuario.password, salt).then((hash) => {

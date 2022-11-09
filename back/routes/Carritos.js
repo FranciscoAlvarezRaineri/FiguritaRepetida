@@ -1,41 +1,18 @@
 const express = require("express");
-const { Carritos } = require("../db/models/index");
+
 const router = express.Router();
+const carritosController = require("../controllers/carritosController");
 
-router.get("/", (req, res) => {
-  Carritos.findAll()
-    .then((result) => res.status(200).send(result))
-    .catch((err) => console.log(err));
-});
+router.get("/:usuarioId", carritosController.getCarrito);
 
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
-  Carritos.findOne({ where: { id } })
-    .then((result) => res.status(200).send(result))
-    .catch((err) => console.log(err));
-});
+router.get("/historial/:usuarioId", carritosController.historial);
 
-// router.post("/:id", (req, res) => {
-//   Carritos.create(req.body)
-//   .then((res)=> {
-//     res.usuarioId = req.params.id
-//   })
-//     .then((result) => res.status(201).send(result))
-//     .catch((err) => console.log(err));
-// });
+router.post("/agregar", carritosController.agregar);
 
-// router.put("/:id", (req, res) => {
-//   const id = req.params.id;
-//   Carritos.update(req.body, { where: { id } }).then((result) =>
-//     res.status(202).send(result)
-//   );
-// });
+router.delete("/borrarUno/:pedidoId", carritosController.borrarUno);
 
-router.delete("/:id", (req, res) => {
-  const id = req.params.id;
-  Carritos.destroy({ where: { id } }).then((result) =>
-    res.status(204).send(result)
-  );
-});
+router.delete("/borrarTodos/:carritoId", carritosController.borrarTodos);
+
+router.put("/comprar/:carritoId", carritosController.comprar);
 
 module.exports = router;

@@ -4,7 +4,9 @@ module.exports = function () {
   return Carritos.findByPk(1)
     .then((carrito) => {
       carrito.comprar(carrito).then((carrito) => {
-        carrito.comprar(carrito);
+        setTimeout(() => {
+          carrito.comprar(carrito);
+        }, 10);
       });
     })
     .catch((err) => console.log(err));

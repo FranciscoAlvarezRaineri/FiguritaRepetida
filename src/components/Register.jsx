@@ -57,16 +57,23 @@ const Register = () => {
   const handleAlreadyRegister = (event) => {};
   const paperStyle = {
     padding: 20,
-    height: "70vh",
+    height: "45vh",
     width: 280,
     margin: "20px auto",
+    marginTop: "50px",
   };
 
   const btnstyle = { margin: "8px 0" };
 
   return (
     <Grid>
-      <Paper elevation={10} style={paperStyle}>
+      <Paper
+        sx={{
+          borderRadius: 3,
+        }}
+        elevation={10}
+        style={paperStyle}
+      >
         <InputLabel id="demo-simple-select-standard-label">
           Tipo de Usuario
         </InputLabel>
@@ -131,11 +138,23 @@ const Register = () => {
           style={btnstyle}
           fullWidth
           onClick={handleSubmit}
+          sx={{
+            borderRadius: 3,
+            background: "#CAF0F8",
+            fontWeight: "bold",
+            color: "#023E8A",
+          }}
         >
           Registrarse
         </Button>
         <label>Ya estas registrado?</label>
         <Button
+          sx={{
+            borderRadius: 3,
+            background: "#CAF0F8",
+            fontWeight: "bold",
+            color: "#023E8A",
+          }}
           type="button"
           color="primary"
           variant="contained"

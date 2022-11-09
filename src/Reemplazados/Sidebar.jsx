@@ -27,7 +27,11 @@ const Sidebar = () => {
       sx={{
         width: drawerWidth,
         flexShrink: 0,
-        [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: "border-box" },
+        [`& .MuiDrawer-paper`]: {
+          width: drawerWidth,
+          boxSizing: "border-box",
+          backgroundColor: "#0077B6",
+        },
       }}
     >
       <Box sx={{ overflow: "auto" }}>
@@ -36,10 +40,10 @@ const Sidebar = () => {
             <ListItem key={text} disablePadding>
               <Link to={`/search/${text}`} style={{ textDecoration: "none" }}>
                 <ListItemButton>
-                  <ListItemIcon sx={{ color: "#0077B6" }}>
+                  <ListItemIcon sx={{ color: "#CAF0F8" }}>
                     <ArrowCircleRightSharpIcon />
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={text} sx={{ color: "#CAF0F8" }} />
                 </ListItemButton>
               </Link>
             </ListItem>

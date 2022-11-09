@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Button } from "@mui/material";
+import { Button, colors } from "@mui/material";
 import Grid from "./Grid";
-
+import { Box } from "@mui/system";
 const ContentRareza = ({ Todas }) => {
   const [productos, setProductos] = useState([]);
 
@@ -14,22 +14,36 @@ const ContentRareza = ({ Todas }) => {
 
   return (
     <>
-      <Button
-        onClick={() => {
-          setProductos(productosRarezaCero);
-        }}
-        variant="outlined"
-      >
-        Normales
-      </Button>
-      <Button
-        onClick={() => {
-          setProductos(productosRareza1);
-        }}
-        variant="outlined"
-      >
-        Dorados
-      </Button>
+      <Box m={5} display="flex" justifyContent="center" alignItems="center">
+        <Button
+          sx={{
+            borderRadius: 3,
+            background: "#CAF0F8",
+            fontWeight: "bold",
+            color: "#023E8A",
+          }}
+          onClick={() => {
+            setProductos(productosRarezaCero);
+          }}
+          variant="outlined"
+        >
+          Normales
+        </Button>
+        <Button
+          sx={{
+            borderRadius: 3,
+            background: "#CAF0F8",
+            fontWeight: "bold",
+            color: "#023E8A",
+          }}
+          onClick={() => {
+            setProductos(productosRareza1);
+          }}
+          variant="outlined"
+        >
+          Dorados
+        </Button>
+      </Box>
       <Grid productos={productos} />
     </>
   );

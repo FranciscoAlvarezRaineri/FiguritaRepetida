@@ -7,7 +7,7 @@ const productosFalsos = [
     apellido: "Messi",
     posicion: "delantero",
     pais: "Argentina",
-    stock: 0,
+    stock: 1,
     precio: 2000000000,
     rareza: 1,
     urlImagen:
@@ -21,7 +21,7 @@ const productosFalsos = [
     pais: "Argentina",
     stock: 200,
     precio: 100,
-    rareza: 0,
+    rareza: 1,
     urlImagen:
       "https://http2.mlstatic.com/D_NQ_NP_827829-MLA51882763339_102022-V.jpg",
   },
@@ -33,14 +33,14 @@ const productosFalsos = [
     pais: "Argentina",
     stock: 10,
     precio: 200,
-    rareza: 0,
+    rareza: 1,
     urlImagen:
       "https://http2.mlstatic.com/D_NQ_NP_731723-MLA51863587656_102022-V.jpg",
   },
   {
     tipo: "pelota",
     nombre: "Al Rihla",
-    stock: 1,
+    stock: 10,
     precio: 2000,
     rareza: 1,
     urlImagen:
