@@ -48,8 +48,9 @@ const Footer = () => {
               </Typography>
               <a>
                 Somos <a href="/">Figurita Repetida &reg;</a> el primer
-                ecommerce en vender figuritas del mundial de 2022 en Argentina y
-                Uruguay
+                ecommerce de venta figuritas del mundial de 2022 en Argentina y
+                Uruguay. Este sitio es solo un ejercicio, ninguna figurita puede
+                ser comprada y nunca te pedirá datos reales.
               </a>
             </Stack>
           </Grid>
