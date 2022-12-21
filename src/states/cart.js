@@ -12,19 +12,14 @@ export const agregarItem = createAsyncThunk(
   "cart/agregarItem",
   async (data, thunkAPI) => {
     const { idUser, cantidad, idProducto } = data;
-    console.log(
-      "--------------------------------------",
-      idUser,
-      cantidad,
-      idProducto
-    );
+
     try {
       const respuesta = await axios.post("/api/carritos/agregar", {
         usuarioId: idUser,
         productoId: idProducto,
         cantidad: cantidad,
       });
-      console.log("me esta devolviendo el back", respuesta.data);
+
       return respuesta.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -36,9 +31,8 @@ export const obtenerItems = createAsyncThunk(
   "cart/obtenerItems",
   async (idUser, thunkAPI) => {
     try {
-      console.log("me esta llegando", idUser);
       const respuesta = await axios.get(`/api/carritos/${idUser}`);
-      console.log("el axios me esta devolviendo", respuesta.data);
+
       return respuesta.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -51,7 +45,7 @@ export const eliminarItem = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const respuesta = await axios.delete(`/api/carritos/borrarUno/${id}`);
-      console.log("delete me esta devolviendo", respuesta.data);
+
       return respuesta.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -88,13 +82,11 @@ const cartSlice = createSlice({
       state.cartItems = state.cartItems.filter((item) => item.id !== id); //devuelvo todos los items que no tienen ese id
     },
     incrementarCarrito: (state, action) => {
-        
       //Incrementar cuantos del mismo item tengo en el carrito
       const itemDelCarrito = state.cartItems.find(
         //busco el item que recibo como payload en el array de items de mi estado
         (item) => item.id === action.payload
       );
-      console.log("=========================================", itemDelCarrito);
       itemDelCarrito.cantidad = itemDelCarrito.cantidad + 1; //le sumo 1 a la cantidad
     },
     decrementarCarrito: (state, action) => {
@@ -117,24 +109,18 @@ const cartSlice = createSlice({
   },
   extraReducers: {
     [agregarItem.fulfilled]: (state, action) => {
-      console.log("Agregar item le llega", action.payload);
       state.cartItems.push(action.payload);
     },
     [obtenerItems.fulfilled]: (state, action) => {
-      console.log("carrito tiene", action.payload);
       state.cartItems = action.payload.pedidos;
       state.id = action.payload.id;
     },
-    [obtenerItems.rejected]: (state, action) => {
-      console.log("mi action es", action);
-    },
+    [obtenerItems.rejected]: (state, action) => {},
     [eliminarItem.fulfilled]: (state, action) => {
       const id = action.payload; //recibe un ID como payload desde React
       state.cartItems = state.cartItems.filter((item) => item.id !== id);
     },
-    [eliminarItem.rejected]: (state, action) => {
-      return "fallo al borrar";
-    },
+    [eliminarItem.rejected]: (state, action) => {},
     [limpiarCart.fulfilled]: (state, action) => {
       state.cartItems = [];
     },

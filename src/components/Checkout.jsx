@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 
 import DetallesHistorial from "./DetallesHistorial";
 
-const Checkout = ({ productos }) => {
+const Checkout = ({}) => {
   const navigate = useNavigate();
   const handleCompra = () => {
     if (carrito.total !== 0) {
@@ -48,7 +48,6 @@ const Checkout = ({ productos }) => {
   return (
     <Paper elevation={10} style={paperStyle}>
       <div>
-        {console.log(carrito)}
         <Typography
           sx={{ textAlign: "center", marginBottom: "25px" }}
           fontFamily={"'Bungee Spice', cursive"}

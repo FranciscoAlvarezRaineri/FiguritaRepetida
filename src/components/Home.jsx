@@ -1,19 +1,15 @@
 import React from "react";
 import Grilla from "./Grids/Grid";
-import Carrousel from "./Carrousel";
-import { Button, Paper, Typography } from "@mui/material";
+
+import { Paper } from "@mui/material";
 import { useState } from "react";
-import { useEffect } from "react";
+
 import Paginacion from "./Paginacion";
 
 const Home = ({ productos }) => {
-  const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostsPerPage] = useState(9);
-  // useEffect(() => {
-  //   setProducts(productos);
-  // },[products]);
-  console.log("PRODUCTOS", products);
+
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPosts = productos.slice(indexOfFirstPost, indexOfLastPost);

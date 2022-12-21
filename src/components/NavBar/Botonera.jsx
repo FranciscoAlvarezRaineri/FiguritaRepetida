@@ -1,5 +1,5 @@
-import { Button, Stack, Toolbar, Typography } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Button, Stack } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -8,9 +8,9 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonIcon from "@mui/icons-material/Person";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import FeedIcon from "@mui/icons-material/Feed";
-import { useState, useEffect } from "react";
+
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Botonera = () => {
   const user = useSelector((state) => state.user);
@@ -20,7 +20,7 @@ const Botonera = () => {
       .post("/api/usuario/logout")
       .then((result) => console.log(result.data));
   };
-  // console.log("prueba")
+
   const navigate = useNavigate();
 
   return (

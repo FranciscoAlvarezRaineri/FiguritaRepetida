@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 import { useNavigate } from "react-router";
 
@@ -89,8 +90,15 @@ const AddProd = () => {
     if (rareza !== "") newObj.rareza = rareza;
     if (precio !== 0) newObj.precio = precio;
     if (stock !== 0) newObj.stock = stock;
-    console.log("Se agregará el siguiente producto", newObj);
-    axios.post("/api/productos", newObj).then((res) => console.log(res));
+
+    axios.post("/api/productos", newObj).then((res) => {
+      console.log(res);
+      Swal.fire({
+        icon: "success",
+        title: "Producto añadido",
+        text: "El producto se ha añadido correctamente!",
+      });
+    });
     resetAll();
     navigate("/admin");
   };

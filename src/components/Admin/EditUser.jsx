@@ -5,13 +5,13 @@ import {
   InputLabel,
   Typography,
   Button,
-  Grid,
   Select,
   MenuItem,
 } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 const EditUser = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -25,21 +25,32 @@ const EditUser = () => {
     setUser(e.target.value);
   };
   const handleAdminize = () => {
-    console.log("Se ha ascendido a admin al user ");
-    console.log(user);
     axios
       .put(`/api/usuario/promover/${user}`)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        Swal.fire({
+          icon: "success",
+          title: "Nuevo Admin",
+          text: "Nuevo Admin!",
+        });
+      })
+
       .catch((err) => console.log(err));
     setUser("");
   };
 
   const handleDelete = () => {
-    console.log("Se eliminara  ");
-    console.log(user);
     axios
       .delete(`/api/usuario/eliminar/${user}`)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        Swal.fire({
+          icon: "success",
+          title: "Eliminado...",
+          text: "Usuario eliminado!",
+        });
+      })
       .catch((err) => console.log(err));
     setUser("");
   };

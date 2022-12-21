@@ -18,12 +18,12 @@ const initialState = {
 export const login = createAsyncThunk("user/login", async (user, thunkAPI) => {
   try {
     const { email, password } = user;
-    // console.log("mis datos de usuario", email, "==", password);
+
     const respuesta = await axios.post("/api/usuario/login", {
       email: email,
       password: password,
     });
-    console.log(respuesta.data);
+
     return respuesta.data;
   } catch (error) {
     return thunkAPI.rejectWithValue({
@@ -49,7 +49,6 @@ export const obtenerFavoritos = createAsyncThunk(
   "user/obtenerFavoritos",
   async (idUser, thunkAPI) => {
     try {
-      console.log("mi user es11", idUser);
       const respuesta = await axios.get(`/api/favoritos/${idUser}`);
       return respuesta.data;
     } catch (error) {
@@ -63,7 +62,6 @@ export const agregarFavorito = createAsyncThunk(
   async (data, thunkAPI) => {
     const { idUser, idProducto } = data;
     try {
-      console.log("Mi usuario es: ", idUser, "mi producto es: ", idProducto);
       const respuesta = await axios.post("/api/favoritos");
       return respuesta.data;
     } catch (error) {
@@ -88,23 +86,16 @@ export const eliminarFav = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    getUser: (state, action) => (state.user = action.payload), //cambio el estado actual de user por el nuevo usuario
-    setUser: (state, action) => state.user, //simplemente retorno el usuario
-  },
+  reducers: {},
   extraReducers: {
     [obtenerFavoritos.fulfilled]: (state, action) => {
       state.favoritos = action.payload;
     },
     [agregarFavorito.fulfilled]: (state, action) => {
-      console.log("Mi payload al agregar favorito es ", action.payload);
       state.favoritos.push(action.payload);
       return state;
     },
     [login.fulfilled]: (state, action) => {
-      // console.log("me esta llegando", action.payload);
-      // state.user = action.payload;
-      //return state;
       state.rol = action.payload.rol;
       state.username = action.payload.username;
       state.email = action.payload.email;
@@ -125,10 +116,8 @@ const userSlice = createSlice({
       state.id = action.payload.id;
     },
     [eliminarFav.fulfilled]: (state, action) => {
-      console.log("action al borrar favoritos", action.payload);
       const id = action.payload; //recibe un ID como payload desde React
       state.favoritos = state.favoritos.filter((item) => item.id !== id); //devuelvo todos los items que no tienen ese id
-      console.log("mi state al terminar delete fav", state.user);
     },
   },
 });

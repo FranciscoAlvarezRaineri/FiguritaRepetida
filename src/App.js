@@ -1,14 +1,13 @@
-import logo from "./logo.svg";
 import "./App.css";
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
 import axios from "axios";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Sidebar from "./Reemplazados/Sidebar";
+
 import Grid from "./components/Grids/Grid";
 import SingleProduct from "./commons/SingleProduct";
-import CardProduct from "./commons/Cards/Card";
+
 import Home from "./components/Home";
 import ContentPaises from "./components/Contents/ContentPaises";
 import ContentEspeciales from "./components/Contents/ContentEspeciales";
@@ -26,8 +25,8 @@ import Footer from "./components/Footer";
 
 import { useDispatch, useSelector } from "react-redux";
 import { calcularTotal, obtenerItems } from "./states/cart";
-import { useSelect } from "@mui/base";
-import { isLoggedIn, obtenerFavoritos } from "./states/user";
+
+import { isLoggedIn } from "./states/user";
 import Checkout from "./components/Checkout";
 function App() {
   const [allProducts, setAllProducts] = useState([]);
@@ -39,32 +38,29 @@ function App() {
 
   useEffect(() => {
     {
-      user.id == null ? console.log("es null") : dispatch(calcularTotal());
+      user.id == null ? console.log("") : dispatch(calcularTotal());
     }
   }, [cartItems]);
 
   useEffect(() => {
     {
-      user.id == null
-        ? console.log("es null")
-        : dispatch(obtenerItems(user.id));
+      user.id == null ? console.log("") : dispatch(obtenerItems(user.id));
     }
   }, [user.id]);
 
   useEffect(() => {
     {
-      user.id == null ? dispatch(isLoggedIn()) : console.log(user);
+      user.id == null ? dispatch(isLoggedIn()) : console.log("");
     }
   }, []);
 
-  // console.log("mi carrito es", cartItems);
   //! ========================================================
 
   useEffect(() => {
     axios
       .get("/api/productos")
       .then((result) => setAllProducts(result.data))
-      // .then((allFigurites) => setAllProducts(allFigurites))
+
       .catch((error) => console.error(error));
   }, []);
 
@@ -72,7 +68,7 @@ function App() {
     <div className="todo">
       <div className="content">
         <MenuLateral />
-        {/* <Navbar /> */}
+
         <Routes>
           <Route path="/" element={<Home productos={allProducts} />} />
           <Route path="/historialCarrito" element={<History />} />

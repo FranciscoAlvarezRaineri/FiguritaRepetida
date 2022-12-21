@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 import { useNavigate } from "react-router";
 
@@ -101,16 +102,29 @@ const EditProd = () => {
     if (rareza !== "") newObj.rareza = rareza;
     if (precio !== 0) newObj.precio = precio;
     if (stock !== 0) newObj.stock = stock;
-    console.log("El id del producto es", prod);
-    console.log("Se editarán los siguientes campos", newObj);
-    axios.put(`/api/productos/${prod}`, newObj).then((res) => console.log(res));
+
+    axios.put(`/api/productos/${prod}`, newObj).then((res) => {
+      console.log(res);
+      Swal.fire({
+        icon: "success",
+        title: "Producto editado",
+        text: "Se ha editado correctamente!",
+      });
+    });
     resetAll();
     navigate("/admin");
   };
   const handleDeleteProd = (e) => {
     e.preventDefault();
-    console.log("Se eliminará el siguiente producto", prod);
-    axios.delete(`/api/productos/${prod}`).then((res) => console.log(res));
+
+    axios.delete(`/api/productos/${prod}`).then((res) => {
+      console.log(res);
+      Swal.fire({
+        icon: "success",
+        title: "Producto Eliminado",
+        text: "Se ha eliminado correctamente!",
+      });
+    });
     resetAll();
     navigate("/admin");
   };

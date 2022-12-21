@@ -12,7 +12,7 @@ import Foto from "./Imagen";
 const steps = [
   {
     label: "Select campaign settings",
-    // description: <CardCarrito />,
+    
     description: <Foto />,
   },
   {
