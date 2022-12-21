@@ -6,21 +6,23 @@ import SendIcon from "@mui/icons-material/Send";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 import DetallesHistorial from "./DetallesHistorial";
 
-const Checkout = ({ productos }) => {
+const Checkout = ({}) => {
+  const navigate = useNavigate();
   const handleCompra = () => {
     if (carrito.total !== 0) {
       axios
         .put(`/api/carritos/comprar/${carrito.id}`)
-
         .catch((error) => console.log(error));
       Swal.fire(
         "Su compra ha sido realizada!",
         "Le vamos a estar enviando un mail con toda la informacion",
         "success"
       );
+      navigate("/");
     } else {
       Swal.fire({
         icon: "error",
@@ -46,7 +48,6 @@ const Checkout = ({ productos }) => {
   return (
     <Paper elevation={10} style={paperStyle}>
       <div>
-        {console.log(carrito)}
         <Typography
           sx={{ textAlign: "center", marginBottom: "25px" }}
           fontFamily={"'Bungee Spice', cursive"}

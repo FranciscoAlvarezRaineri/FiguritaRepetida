@@ -63,6 +63,13 @@ class productosController {
       .then(() => res.status(202).send({}))
       .catch((err) => res.status(400).send(err));
   }
+
+  static buscarMasVendidos(req, res) {
+    productosServices
+      .buscarMasVendidos()
+      .then((result) => res.status(202).send(result))
+      .catch((err) => res.status(400).send(err));
+  }
 }
 
 module.exports = productosController;

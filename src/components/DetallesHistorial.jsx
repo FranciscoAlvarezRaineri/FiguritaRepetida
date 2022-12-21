@@ -13,7 +13,6 @@ const DetallesHistorial = ({ detalles }) => {
 
   return (
     <>
-      {" "}
       {detalles.map((product, i) => (
         <div>
           <h4> Producto: {product.producto.nombreCompleto} </h4>

@@ -8,7 +8,7 @@ import DetallesHistorial from "../../components/DetallesHistorial";
 
 const Img = styled("img")({
   margin: "auto",
-  display: "block",
+  display: "flex",
   maxWidth: "100%",
   maxHeight: "100%",
 });
@@ -17,12 +17,11 @@ export default function CardHistorial({ carrito }) {
   return (
     <Paper
       sx={{
-        marginLeft: "10%",
+        margin: "auto",
         marginBottom: "3%",
-        p: 2,
+        p: 4,
         maxWidth: 500,
-        flexGrow: 1,
-        backgroundColor: "#CAF0F8",
+        backgroundColor: "lightgray",
       }}
     >
       <Grid container spacing={4}>

@@ -3,17 +3,18 @@ import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import ButtonBase from "@mui/material/ButtonBase";
-import { Stack, Button, IconButton } from "@mui/material";
-import axios from "axios";
-import { useState } from "react";
+
+import { IconButton } from "@mui/material";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useDispatch, useSelector } from "react-redux";
 import { eliminarItem, obtenerItems } from "../../states/cart";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+
+import { incrementarCarrito, decrementarCarrito } from "../../states/cart";
+import Swal from "sweetalert2";
 const Img = styled("img")({
   margin: "auto",
   display: "block",
@@ -24,17 +25,28 @@ const Img = styled("img")({
 export default function CardCarrito({ product, cantidad, id }) {
   const user = useSelector((state) => state.user);
 
-  const [producto, setProducto] = useState({});
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const handleAdd = () => {};
-  const handleRemove = () => {};
+  const handleAdd = () => {
+    if (product.stock > cantidad) dispatch(incrementarCarrito(id));
+    else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No hay mas stock para agregar",
+      });
+    }
+  };
+  const handleDecrease = () => {
+    if (cantidad > 1) dispatch(decrementarCarrito(id));
+    else {
+      dispatch(eliminarItem(id));
+
+      window.location.reload(false);
+    }
+  };
 
   const handleDelete = () => {
-    // axios
-    //   .delete(`/api/carritos/borrarUno/${id}`)
-    //   .catch((error) => console.log(error));
     dispatch(eliminarItem(id));
     window.location.reload(false);
   };
@@ -110,7 +122,7 @@ export default function CardCarrito({ product, cantidad, id }) {
           </IconButton>
           <IconButton
             onClick={() => {
-              handleRemove();
+              handleDecrease();
             }}
           >
             <RemoveIcon />

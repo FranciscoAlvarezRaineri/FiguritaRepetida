@@ -56,7 +56,7 @@ const Register = () => {
       })
       .then(() => navigate("/login"))
       .catch(() => alert("Falló el registro"));
-    //Body: Obj {username, tipo, nombre, contraseña, email}
+    
   };
   const handleAlreadyRegister = (event) => {};
 
@@ -124,7 +124,7 @@ const Register = () => {
           value={password}
           id="outlined-basic-password"
           label="Password"
-          type="text"
+          type="password"
           fullWidth
           required
           onChange={passwordOnChange}

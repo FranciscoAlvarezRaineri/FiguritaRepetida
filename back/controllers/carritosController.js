@@ -27,7 +27,7 @@ class carritosController {
       .getProductById(productoId)
       .then((producto) => {
         // comprobar si hay stock suficiente del producto
-        if (producto.stock > cantidad) {
+        if (producto.stock >= cantidad) {
           // si existe, continua con la creación del pedido
           carritosServices.getCarritoDelUsuario(usuarioId).then((carrito) => {
             // comprobar si un pedido de un producto en un carrito ya existe

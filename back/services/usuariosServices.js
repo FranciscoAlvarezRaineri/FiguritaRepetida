@@ -12,8 +12,8 @@ class usuariosServices {
   }
 
   // crear un usuario
-  static registro(body) {
-    return Usuarios.create(body);
+  static registro(usuario) {
+    return Usuarios.create(usuario);
   }
 
   // editar un usuario

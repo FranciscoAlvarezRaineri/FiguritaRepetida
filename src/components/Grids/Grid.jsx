@@ -5,7 +5,7 @@ import { Container, Grid, Paper, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 
 const Grilla = ({ productos }) => {
-  // if(!productos) return <p>Esa figurita no existe</p>
+
   const handleSig = () => {};
 
 

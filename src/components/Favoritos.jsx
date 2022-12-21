@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Typography } from "@mui/material";
+import { Paper } from "@mui/material";
 
 import { useEffect } from "react";
 
@@ -7,9 +7,9 @@ import GrillaFavs from "../components/Grids/GrillaFavs";
 import { useSelector, useDispatch } from "react-redux";
 import { obtenerFavoritos } from "../states/user";
 const Favoritos = () => {
-  // const [user, setUser] = useState([]);
+  
   const user = useSelector((store) => store.user);
-  //const [favoritos, setFavoritos] = useState([]);
+ 
   const dispatch = useDispatch();
 
   useEffect(() => {

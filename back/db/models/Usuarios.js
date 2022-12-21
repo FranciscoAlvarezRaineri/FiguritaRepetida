@@ -94,6 +94,7 @@ Usuarios.init(
     sequelize: db,
     modelName: "usuario",
     hooks: {
+      // Hashear la contraseña
       beforeCreate: (usuario) => {
         const salt = bcrypt.genSaltSync();
         usuario.salt = salt;
@@ -101,12 +102,14 @@ Usuarios.init(
           usuario.password = hash;
         });
       },
+      // Crear carrito del usuario
       afterCreate: (usuario) => {
-        Carritos.create({ usuarioId: usuario.id }); // Crear carrito del usuario
+        Carritos.create({ usuarioId: usuario.id });
       },
+      // Hashear la contraseña y crear carrito del usuario
       afterBulkCreate: (res) => {
         res.forEach((usuario) => {
-          Carritos.create({ usuarioId: usuario.id }); // Crear carrito del usuario
+          Carritos.create({ usuarioId: usuario.id });
           const salt = bcrypt.genSaltSync();
           usuario.update({ salt: salt });
           return usuario.hash(usuario.password, salt).then((hash) => {

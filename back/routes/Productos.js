@@ -11,6 +11,8 @@ router.get("/buscar/:tags", productosController.buscarPorTags);
 
 router.get("/filtrar/categorias", productosController.filtrarPorCategorias);
 
+router.get("/filtrar/mas_vendidos", productosController.buscarMasVendidos);
+
 // Admin:
 
 router.post("/", validarAuth, validarRol, productosController.adminPost);

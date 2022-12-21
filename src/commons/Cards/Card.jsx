@@ -4,25 +4,14 @@ import { Paper } from "@mui/material";
 
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-// import { useState } from "react";
-// import axios from "axios";
+import Typography from "@mui/material/Typography";
+
 import { useNavigate } from "react-router";
 
 export default function CardProduct({ product }) {
   const navigate = useNavigate();
-  // const [favorite, setFavorite] = useState({});
 
-  // const addToFavorite = () => {
-  //   axios.post("url crear un fav").then((fav) => {
-  //     setFavorite(fav.data);
-  //   });
-  // };
   const paperStyle = {
     display: "flex",
     flexDirection: "column",
@@ -65,8 +54,7 @@ export default function CardProduct({ product }) {
             {product.posicion}
           </Typography>
         </CardContent>
-        {/* onClick={() => addToFavorite()} */}
-        {/* onClick={() => addProdToCart()} */}
+        
       </Card>
     </Paper>
   );

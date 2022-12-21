@@ -56,7 +56,7 @@ export default function SingleProduct({ cantidad }) {
             width="90%"
             src={producto.urlImagen}
             alt="Foto de producto"
-            // className="singleProductLeftImagen"
+            
           />
         </Grid>
         <Grid
@@ -75,7 +75,7 @@ export default function SingleProduct({ cantidad }) {
         </Grid>
       </Grid>
 
-      {/* ACA EN VEZ DE CARD VA LA IMAGEN DE LA FIGU NO LA CARD, SIMPLEMENTE PARA VER COMO QUEDA ESTA LA CARD */}
+     
     </Paper>
   );
 }
